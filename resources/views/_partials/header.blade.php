@@ -10,21 +10,24 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item d-flex align-items-center">
+                    <a class="nav-link" href="{{ route('index') }}" title="Home">Home</a>
+                </li>
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
                         <div class="nav-link">
-                            <a class="btn btn-outline-primary" href="{{ route('register') }}">Registrar</a>
+                            <a class="btn btn-sm btn-outline-primary" href="{{ route('register') }}">Registrar</a>
                         </div>
                     </li>
                     <li class="nav-item">
                         <div class="nav-link">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalLoginForm">
                                 Login
                             </button>
                         </div>
 
-                        @include('_partials.modal.loginForm')
+                        @include('_partials.modal.loginModal')
                     </li>
                 @else
                     <li class="nav-item dropdown">
