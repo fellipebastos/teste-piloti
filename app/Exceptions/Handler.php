@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Auth\Access\AuthorizationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof AuthorizationException){       
+            return redirect()->route('index');
+        }
+
+        if($exception instanceof MethodNotAllowedHttpException){       
+            return redirect()->route('index');
+        }
+
         return parent::render($request, $exception);
     }
 }

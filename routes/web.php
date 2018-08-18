@@ -18,4 +18,6 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::middleware('auth')->group(function () {
    
     Route::get('/home', 'HomeController@home')->name('home');
+    Route::get('/profile/{id?}', 'ProfileController@edit')->name('profile');
+    Route::post('/profile/update/{id}', 'ProfileController@update')->name('profile.update');
 });

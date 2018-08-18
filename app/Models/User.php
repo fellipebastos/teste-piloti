@@ -4,10 +4,25 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    public static function boot() {
+        parent::boot();
+    
+        // Antes de armazenar/atualizar o modelo
+        static::saving(function (User $user) {
+            
+            // Verifica se existe uma nova senha
+            if (Hash::needsRehash($user->password)) {
+                // Criptografa senha
+                $user->password = Hash::make($user->password);
+            }
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +30,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'permission'
+        'name', 
+        'email', 
+        'password', 
+        'permission',
     ];
 
     /**
@@ -24,9 +42,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
     ];
 
+    /**
+     * Checks if user is admin.
+     * 
+     * @return boolean
+     */
     public function isAdmin() {
         return ($this->attributes['permission'] === 5);
     }
