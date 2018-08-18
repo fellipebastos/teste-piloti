@@ -24,8 +24,8 @@ class ProfileController extends Controller
     public function edit(EditUserFormRequest $request, $id = null)
     {
         // Caso exsista um id busca o usuário, senão, atribui o usuário logado
-        $user = $id ? $user->find($id) : auth()->user();
-        
+        $user = $id ? $this->user->find($id) : auth()->user();
+
         return view('profile', compact('user'));
     }
 
