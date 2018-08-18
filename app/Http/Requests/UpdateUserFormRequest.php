@@ -17,6 +17,16 @@ class UpdateUserFormRequest extends FormRequest
     }
 
     /**
+     * Prepare request for validation
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'permission' =>  $this->input('permission') === 'true' ? true : false,
+        ]);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,9 +34,10 @@ class UpdateUserFormRequest extends FormRequest
     public function rules()
     {   
         return [
-            'name'      =>  'required|string',
-            'email'     =>  'required|email|unique:users,email,' . $this->route()->id,
-            'password'  =>  'nullable|confirmed|min:6',
+            'name'          =>  'required|string',
+            'email'         =>  'required|email|unique:users,email,' . $this->route()->id,
+            'permission'    =>  'required|boolean',
+            'password'      =>  'nullable|confirmed|min:6',
         ];
     }
 }

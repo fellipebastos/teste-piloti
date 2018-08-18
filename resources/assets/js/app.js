@@ -20,3 +20,19 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+
+// jQuery Scripts
+$(function () {
+
+    // Delete Form
+    $('.j-deleteBtn').on('click', function () {
+        var $id = $(this).data('id');
+        
+        $("#deleteForm > input[name='id']").val($id);
+    });
+
+    $('#deleteBtnConfirm').on('click', function() {
+        $('#deleteForm').submit();
+    });
+});

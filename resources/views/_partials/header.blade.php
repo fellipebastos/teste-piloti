@@ -37,6 +37,13 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('profile') }}">Meu Perfil</a>
+                            
+                            @if (auth()->user()->isAdmin())
+                                <a class="dropdown-item" href="{{ route('panel') }}">Painel Admin</a>
+                            @endif
+                            
+                            <div class="dropdown-divider"></div>
+                            
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>

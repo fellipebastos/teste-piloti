@@ -1,20 +1,12 @@
 @extends('_layouts.app')
 
 @section('content')
-<section class="py-5">
+<section class="py-4">
     <div class="container">
         <h1>Seu Perfil</h1>
-        
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
 
         @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
+            @include('_partials.alert', ['alert_type' => 'success'])
         @endif
         
         <hr>
@@ -79,8 +71,8 @@
             @if (auth()->user()->isAdmin())
             <div class="form-group">
                 <div class="form-check">
-                    <input id="admin" class="form-check-input" type="checkbox" name="admin" value="true" {{ $user->isAdmin() ? 'checked' : '' }}>
-                    <label class="fomr-check-label" for="admin">É admin?</label>
+                    <input id="permission" class="form-check-input" type="checkbox" name="permission" value="true" {{ $user->isAdmin() ? 'checked' : '' }}>
+                    <label class="fomr-check-label" for="permission">É admin?</label>
                 </div>
             </div>
             @endif

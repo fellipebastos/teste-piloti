@@ -6,10 +6,12 @@
             <h1 class="jumbotron-heading">Bem-Vindo</h1>
             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
             
+            @guest
             <p>
                 <button type="button" class="btn btn-lg btn-primary my-2 mx-1" data-toggle="modal" data-target="#modalLoginForm">Faça Login</button>
                 <a href="{{ route('register') }}" class="btn btn-lg btn-secondary my-2 mx-1">Registre-se</a>
             </p>
+            @endguest
         </div>
     </section>
 
