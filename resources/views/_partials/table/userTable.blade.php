@@ -24,8 +24,8 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->isAdmin() ? 'Sim' : 'Não' }}</td>
-                <td>{{ $user->created_at->format('d/m/Y') }}</td>
-                <td>{{ $user->updated_at->format('d/m/Y H:i') }}</td>
+                <td>{{ $user->created_at ? $user->created_at->format('d/m/Y') : '-' }}</td>
+                <td>{{ $user->updated_at ? $user->updated_at->format('d/m/Y H:i') : '-' }}</td>
                     
                 @if ($user->deleted_at)
                     <td>{{ $user->deleted_at->format('d/m/Y H:i') }}</td>
