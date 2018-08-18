@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     public static function boot() {
         parent::boot();
     
         // Antes de armazenar/atualizar o modelo
         static::saving(function (User $user) {
-            
             // Verifica se existe uma nova senha
             if (Hash::needsRehash($user->password)) {
                 // Criptografa senha
@@ -46,12 +46,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     /**
      * Checks if user is admin.
      * 
      * @return boolean
      */
     public function isAdmin() {
-        return ($this->attributes['permission'] === 5);
+        return ($this->attributes['permission'] === 1);
     }
 }
